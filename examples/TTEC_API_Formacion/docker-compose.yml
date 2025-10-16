@@ -1,0 +1,25 @@
+services:
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sqlserver_container
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    restart: always
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  api:
+    build: .
+    container_name: dotnet_api_container
+    ports:
+      - "2502:80"
+    depends_on:
+      - sqlserver
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=MyDatabase;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+
+volumes:
+  sqlserver_data:
