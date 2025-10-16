@@ -1,0 +1,20 @@
+<p-dialog header="Alumno" [(visible)]="visible" [modal]="true" [closable]="true">
+  <div class="p-fluid">
+    <div class="field">
+      <label>Nombre</label>
+      <input pInputText [(ngModel)]="alumno.nombre" />
+    </div>
+    <div class="field">
+      <label>Curso</label>
+      <input pInputText [(ngModel)]="alumno.curso" />
+    </div>
+    <div class="field">
+      <label>Nota</label>
+      <input type="number" pInputText [(ngModel)]="alumno.nota" />
+    </div>
+  </div>
+
+  <div class="text-right mt-3">
+    <p-button label="Guardar" icon="pi pi-check" (click)="guardarAlumno()"></p-button>
+  </div>
+</p-dialog>

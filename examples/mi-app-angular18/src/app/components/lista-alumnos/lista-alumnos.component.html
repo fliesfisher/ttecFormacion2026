@@ -1,0 +1,42 @@
+<div class="card">
+  <h3>Lista de Alumnos</h3>
+
+  <div class="p-inputgroup mb-3">
+    <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+    <input type="text" pInputText placeholder="Buscar..." [(ngModel)]="filtro" />
+  </div>
+
+  <p-table [value]="alumnosFiltrados" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Curso</th>
+        <th>Nota</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-alumno>
+      <tr>
+        <td>{{ alumno.id }}</td>
+        <td>{{ alumno.nombre }}</td>
+        <td>{{ alumno.curso }}</td>
+        <td>{{ alumno.nota }}</td>
+        <td>
+          <p-button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editarAlumno(alumno)"></p-button>
+          <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="eliminarAlumno(alumno)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-button label="Agregar Alumno" icon="pi pi-plus" (click)="abrirDialogo()"></p-button>
+
+  <app-dialogo-alumno
+    [(visible)]="mostrarDialogo"
+    [alumno]="alumnoSeleccionado"
+    (guardar)="guardarAlumno($event)">
+  </app-dialogo-alumno>
+
+  <p-toast></p-toast>
+</div>
