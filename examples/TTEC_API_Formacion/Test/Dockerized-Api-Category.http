@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:2502/api
+
+### --- Categories ---
+
+# Get all categories
+GET {{baseUrl}}/categories
+Accept: application/json
+
+###
+
+# Get category by id
+GET {{baseUrl}}/categories/1
+Accept: application/json
+
+###
+
+# Create new category
+POST {{baseUrl}}/categories
+Content-Type: application/json
+
+{
+  "name": "Hogar",
+  "description": "Productos para el hogar"
+}
+
+###
+
+# Update category (ejemplo sobre id=1)
+PUT {{baseUrl}}/categories/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Electrónica y gadgets",
+  "description": "Dispositivos tecnológicos y accesorios"
+}
+
+###
+
+# Delete category (ejemplo id=3)
+DELETE {{baseUrl}}/categories/3
+

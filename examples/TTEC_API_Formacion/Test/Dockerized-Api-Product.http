@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:2502/api
+
+### --- Products ---
+
+# Get all products
+GET {{baseUrl}}/products
+Accept: application/json
+
+###
+
+# Get product by id
+GET {{baseUrl}}/products/1
+Accept: application/json
+
+###
+
+# Create new product
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Teclado Mec�nico",
+  "description": "Teclado mec�nico retroiluminado",
+  "price": 45.99,
+  "stockQuantity": 25,
+  "categoryId": 1,
+  "imageUrl": "https://example.com/images/keyboard.jpg"
+}
+
+###
+
+# Update product (ejemplo sobre id=1)
+PUT {{baseUrl}}/products/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Laptop Actualizada",
+  "description": "Laptop con 16GB RAM y 512GB SSD",
+  "price": 799.99,
+  "stockQuantity": 8,
+  "categoryId": 1,
+  "imageUrl": "https://example.com/images/laptop-new.jpg"
+}
+
+###
+
+# Delete product (ejemplo id=2)
+DELETE {{baseUrl}}/products/2
+
+### Dar de baja un producto
+POST http://localhost:5000/api/products/deactivate/1
+
+### Reactivar un producto
+POST http://localhost:5000/api/products/reactivate/1
