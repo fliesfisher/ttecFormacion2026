@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:2502/api
+
+### ---------------- Usuarios ----------------
+
+# Obtener todos los usuarios
+GET {{baseUrl}}/users
+Accept: application/json
+
+###
+# Obtener usuario por id
+GET {{baseUrl}}/users/1
+Accept: application/json
+
+###
+# Crear usuario
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "username": "usuario1",
+  "passwordHash": "hash_sha256_del_front",
+  "email": "usuario1@example.com",
+  "role": "User"
+}
+
+###
+# Actualizar usuario
+PUT {{baseUrl}}/users/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "email": "nuevoemail@example.com",
+  "role": "Admin"
+}
+
+###
+# Borrar usuario
+DELETE {{baseUrl}}/users/2
