@@ -1,0 +1,23 @@
+<div class="login-card">
+	<h2>Iniciar sesión</h2>
+	<form [formGroup]="form" class="login-form" (ngSubmit)="onSubmit()">
+		<div class="form-row">
+			<label for="username">Usuario</label>
+			<input id="username" type="text" pInputText formControlName="username" placeholder="usuario" />
+			<small class="error" *ngIf="form.get('username')?.touched && form.get('username')?.invalid">Usuario obligatorio.</small>
+		</div>
+
+		<div class="form-row">
+			<label for="password">Contraseña</label>
+			<p-password id="password" formControlName="password" [toggleMask]="true" feedback="false" placeholder="Tu contraseña"></p-password>
+			<small class="error" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">Contraseña obligatoria.</small>
+		</div>
+
+		<div class="form-actions">
+			<button pButton type="submit" label="Entrar" class="p-button-raised p-button-primary"></button>
+			<button pButton type="button" label="Crear cuenta" class="p-button-outlined" routerLink="/registro"></button>
+		</div>
+
+		<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+	</form>
+</div>

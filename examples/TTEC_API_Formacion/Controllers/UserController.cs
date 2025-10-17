@@ -36,8 +36,18 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<UserDto>> Create([FromBody] CreateUserDto dto)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
+        // Normalizar entradas
+    dto.Username = (dto.Username ?? string.Empty).Trim();
+    dto.Email = (dto.Email ?? string.Empty).Trim();
+    if (string.IsNullOrWhiteSpace(dto.Email)) return BadRequest("Email is required.");
+
+        // Comprobación insensible a mayúsculas/minúsculas y espacios
         if (await _db.Users.AnyAsync(u => u.Username == dto.Username))
             return BadRequest($"Username '{dto.Username}' already exists.");
+
+        var emailNorm = dto.Email.ToLowerInvariant();
+        if (await _db.Users.AnyAsync(u => u.Email.ToLower() == emailNorm))
+            return BadRequest($"Email '{dto.Email}' already exists.");
 
         var user = dto.ToEntity();
         _db.Users.Add(user);

@@ -2,4 +2,16 @@
   <ng-template pTemplate="start">
     <h2>Mi App</h2>
   </ng-template>
+
+  <ng-template pTemplate="end">
+    <ng-container *ngIf="(currentUser$ | async) as user; else loggedOut">
+      <span class="p-mr-3">Hola, {{ user.username || user.name }}</span>
+      <button *ngIf="(isAdmin$ | async)" class="p-button p-button-secondary p-mr-2" routerLink="/admin/products">Admin Productos</button>
+      <button class="p-button p-button-danger" (click)="logout()">Cerrar sesión</button>
+    </ng-container>
+    <ng-template #loggedOut>
+      <button class="p-button p-button-text" routerLink="/login">Iniciar sesión</button>
+      <button class="p-button p-button-outlined" routerLink="/registro">Registro</button>
+    </ng-template>
+  </ng-template>
 </p-menubar>
